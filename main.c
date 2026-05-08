@@ -1,118 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Performance Risk Alert System</title>
+  <title>Equity Analytical Framework</title>
 
   <style>
 
-    *{
+    body{
+      font-family:Arial;
+      background:#f4f7fb;
       margin:0;
       padding:0;
-      box-sizing:border-box;
-      font-family:Arial, sans-serif;
-    }
-
-    body{
-      background:#f4f7fb;
-      color:#333;
     }
 
     header{
       background:#1e3a8a;
       color:white;
-      padding:20px;
       text-align:center;
+      padding:30px;
     }
 
-    header h1{
-      font-size:40px;
-    }
-
-    nav{
-      background:#162d6b;
-      padding:15px;
-      text-align:center;
-    }
-
-    nav a{
-      color:white;
-      text-decoration:none;
-      margin:15px;
-      font-size:18px;
-    }
-
-    .hero{
-      text-align:center;
-      padding:80px 20px;
-      background:white;
-    }
-
-    .hero h2{
-      font-size:45px;
-      margin-bottom:20px;
-      color:#1e3a8a;
-    }
-
-    .hero p{
-      font-size:20px;
-      width:70%;
-      margin:auto;
-      line-height:1.6;
-    }
-
-    .btn{
-      display:inline-block;
-      margin-top:30px;
-      padding:15px 30px;
-      background:#2563eb;
-      color:white;
-      text-decoration:none;
-      border-radius:8px;
-      font-size:18px;
-    }
-
-    .features{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:30px;
-      padding:60px 20px;
+    .container{
+      width:80%;
+      margin:40px auto;
     }
 
     .card{
       background:white;
-      width:300px;
       padding:25px;
-      border-radius:12px;
+      margin-bottom:25px;
+      border-radius:10px;
       box-shadow:0 0 10px rgba(0,0,0,0.1);
-      text-align:center;
     }
 
-    .card h3{
-      color:#1e3a8a;
-      margin-bottom:15px;
-    }
-
-    .about{
-      padding:60px 20px;
-      text-align:center;
-      background:#e8eefc;
-    }
-
-    .about h2{
-      margin-bottom:20px;
+    h2{
       color:#1e3a8a;
     }
 
-    footer{
-      background:#1e3a8a;
+    ul{
+      line-height:2;
+    }
+
+    button{
+      padding:12px 25px;
+      background:#2563eb;
       color:white;
-      text-align:center;
-      padding:20px;
-      margin-top:40px;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    input{
+      margin:15px 0;
     }
 
   </style>
@@ -122,71 +64,53 @@
 <body>
 
 <header>
-  <h1>Student Performance Risk Alert System 🚀</h1>
-  <p>AI Based Academic Monitoring Platform</p>
+
+  <h1>Equity Analytical Framework 📊</h1>
+
+  <p>
+    Detecting systemic imbalance in uniform learning systems
+  </p>
+
 </header>
 
-<nav>
-  <a href="#">Home</a>
-  <a href="#">Features</a>
-  <a href="#">About</a>
-  <a href="#">Contact</a>
-</nav>
-
-<section class="hero">
-
-  <h2>Track Student Performance Smartly</h2>
-
-  <p>
-    This system helps identify students at academic risk
-    using attendance analysis, marks evaluation,
-    and performance prediction techniques.
-  </p>
-
-  <a href="#" class="btn">Explore Project</a>
-
-</section>
-
-<section class="features">
+<div class="container">
 
   <div class="card">
-    <h3>📊 Performance Analysis</h3>
-    <p>
-      Analyze marks and attendance to understand student progress.
-    </p>
+
+    <h2>Detected Disparities</h2>
+
+    <ul>
+      <li>Group A — Performance Gap: 22%</li>
+      <li>Group B — Attendance Risk: 15%</li>
+      <li>Group C — Learning Disparity: 10%</li>
+    </ul>
+
   </div>
 
   <div class="card">
-    <h3>⚠️ Risk Detection</h3>
-    <p>
-      Detect students who are academically at risk early.
-    </p>
+
+    <h2>Upload Dataset</h2>
+
+    <input type="file">
+
+    <br><br>
+
+    <button>Analyze System</button>
+
   </div>
 
   <div class="card">
-    <h3>📈 Reports & Insights</h3>
-    <p>
-      Generate detailed reports for teachers and institutions.
-    </p>
+
+    <h2>Analytics Dashboard</h2>
+
+    <p>✔ Student Monitoring</p>
+    <p>✔ Attendance Tracking</p>
+    <p>✔ Risk Prediction</p>
+    <p>✔ Smart Reports</p>
+
   </div>
 
-</section>
-
-<section class="about">
-
-  <h2>About This Project</h2>
-
-  <p>
-    Developed as a hackathon project to improve educational
-    monitoring systems and help students perform better
-    through early intervention and smart analytics.
-  </p>
-
-</section>
-
-<footer>
-  <p>Hackathon Project by Poorvi © 2026</p>
-</footer>
+</div>
 
 </body>
 </html>
