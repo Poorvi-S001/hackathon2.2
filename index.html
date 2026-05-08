@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPRAS - Student Performance Risk Alert System</title>
+<title>SPRAS AI Dashboard</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -10,341 +10,230 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
-}body{ background:#f4f7fc; color:#333; }
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
+}body{ background:#0f172a; color:white; overflow-x:hidden; }
 
-header{ background:#111827; color:white; padding:20px 50px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000; }
+header{ position:fixed; top:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:rgba(15,23,42,0.95); backdrop-filter:blur(10px); z-index:1000; }
 
-header h1{ font-size:28px; }
+.logo{ font-size:30px; font-weight:bold; color:#38bdf8; }
 
-nav a{ color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+nav a{ text-decoration:none; color:white; margin-left:25px; font-weight:600; transition:0.3s; }
 
-.hero{ height:90vh; background:linear-gradient(to right,#1e3c72,#2a5298); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; }
+nav a:hover{ color:#38bdf8; }
 
-.hero h2{ font-size:60px; margin-bottom:20px; }
+.hero{ height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb); }
 
-.hero p{ font-size:22px; max-width:800px; line-height:1.6; }
+.hero h1{ font-size:70px; max-width:1000px; margin-bottom:20px; }
 
-.btn{ margin-top:30px; padding:15px 35px; background:white; color:#1e3c72; border:none; border-radius:10px; font-size:18px; cursor:pointer; font-weight:bold; transition:0.3s; }
+.hero p{ font-size:22px; max-width:850px; line-height:1.7; opacity:0.9; }
 
-.btn:hover{ transform:scale(1.05); background:#ddd; }
+.btn{ margin-top:35px; padding:16px 40px; background:#38bdf8; color:#0f172a; border:none; border-radius:50px; font-size:18px; font-weight:bold; cursor:pointer; transition:0.3s; }
 
-section{ padding:80px 50px; }
+.btn:hover{ transform:translateY(-5px) scale(1.03); background:white; }
 
-.section-title{ text-align:center; font-size:40px; margin-bottom:50px; color:#1e3c72; }
+section{ padding:100px 60px; }
 
-.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+.section-title{ font-size:45px; text-align:center; margin-bottom:60px; color:#38bdf8; }
 
-.card{ background:white; padding:30px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer; }
+.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
 
-.card:hover{ transform:translateY(-10px); }
+.card{ background:rgba(255,255,255,0.06); padding:35px; border-radius:20px; backdrop-filter:blur(12px); box-shadow:0 8px 25px rgba(0,0,0,0.3); transition:0.4s; cursor:pointer; }
 
-.card i{ font-size:40px; margin-bottom:20px; color:#1e3c72; }
+.card:hover{ transform:translateY(-10px); background:#1e293b; }
 
-.dashboard{ background:white; padding:40px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.card i{ font-size:45px; margin-bottom:20px; color:#38bdf8; }
 
-.stats{ display:flex; justify-content:space-around; flex-wrap:wrap; margin-bottom:40px; }
+.card h3{ margin-bottom:15px; font-size:24px; }
 
-.stat-box{ background:#1e3c72; color:white; padding:25px; border-radius:15px; width:220px; text-align:center; margin:10px; }
+.dashboard{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; margin-bottom:50px; }
 
-.upload-box{ background:white; padding:40px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.stat-box{ background:linear-gradient(135deg,#1e293b,#334155); padding:30px; border-radius:20px; text-align:center; box-shadow:0 5px 20px rgba(0,0,0,0.3); }
 
-.upload-box input{ margin:20px 0; }
+.stat-box h2{ font-size:45px; color:#38bdf8; }
 
-.team{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+.chart-container{ background:#1e293b; padding:30px; border-radius:20px; margin-top:30px; }
 
-.member{ background:white; padding:25px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.upload-section{ background:#1e293b; padding:50px; border-radius:20px; text-align:center; }
 
-footer{ background:#111827; color:white; text-align:center; padding:20px; margin-top:40px; }
+.upload-section input{ margin:25px 0; }
 
-@media(max-width:768px){ .hero h2{ font-size:40px; }
+.team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; }
 
-.stats{ flex-direction:column; align-items:center; } } </style>
+.member{ background:#1e293b; padding:30px; border-radius:20px; text-align:center; transition:0.3s; }
+
+.member:hover{ transform:scale(1.05); }
+
+.member i{ font-size:50px; margin-bottom:15px; color:#38bdf8; }
+
+.timeline{ position:relative; max-width:900px; margin:auto; }
+
+.timeline-item{ background:#1e293b; padding:25px; margin:20px 0; border-left:5px solid #38bdf8; border-radius:10px; }
+
+footer{ background:#020617; padding:25px; text-align:center; font-size:16px; margin-top:50px; }
+
+@media(max-width:768px){ .hero h1{ font-size:42px; }
+
+nav{ display:none; } } </style>
 
 </head>
 <body><header>
-<h1>SPRAS 🚀</h1>
+<div class="logo">SPRAS 🚀</div>
 <nav>
 <a href="#home">Home</a>
 <a href="#features">Features</a>
 <a href="#dashboard">Dashboard</a>
-<a href="#dataset">Dataset</a>
+<a href="#upload">Dataset</a>
 <a href="#team">Team</a>
+<a href="#timeline">Workflow</a>
 </nav>
 </header><section class="hero" id="home">
-<h2>Student Performance Risk Alert System</h2>
-<p>AI-powered platform to identify at-risk students using attendance analysis, performance tracking, smart prediction and academic analytics.</p>
-<button class="btn" onclick="showDashboard()">Explore Dashboard</button>
+<h1>Student Performance Risk Alert System</h1>
+<p>Advanced AI-powered educational analytics platform designed to identify at-risk students using attendance tracking, predictive analysis, performance monitoring, smart dashboards, and automated alerts.</p>
+<button class="btn" onclick="scrollDashboard()">Explore Dashboard</button>
 </section><section id="features">
-<h2 class="section-title">Features</h2>
+<h2 class="section-title">Smart Features</h2>
 <div class="cards">
-<div class="card" onclick="openFeature('Performance Analytics Opened 📊')">
+<div class="card" onclick="showMessage('AI Prediction Engine Activated 🤖')">
+<i class="fas fa-brain"></i>
+<h3>AI Prediction</h3>
+<p>Predicts students likely to underperform using intelligent analytics.</p>
+</div><div class="card" onclick="showMessage('Attendance Monitoring Started 📅')">
+<i class="fas fa-calendar-check"></i>
+<h3>Attendance Tracking</h3>
+<p>Tracks attendance patterns and flags low participation.</p>
+</div><div class="card" onclick="showMessage('Realtime Alerts Sent 🔔')">
+<i class="fas fa-bell"></i>
+<h3>Realtime Alerts</h3>
+<p>Instant notifications to teachers and parents.</p>
+</div><div class="card" onclick="showMessage('Analytics Report Generated 📊')">
 <i class="fas fa-chart-line"></i>
 <h3>Performance Analytics</h3>
-<p>Analyze marks, assignments, attendance and performance trends.</p>
-</div><div class="card" onclick="openFeature('Risk Detection Activated ⚠️')">
+<p>Visual dashboards with smart performance insights.</p>
+</div><div class="card" onclick="showMessage('Dataset Successfully Processed 📁')">
+<i class="fas fa-database"></i>
+<h3>Dataset Processing</h3>
+<p>Upload and process CSV datasets instantly.</p>
+</div><div class="card" onclick="showMessage('Student Risk Detection Active ⚠️')">
 <i class="fas fa-triangle-exclamation"></i>
 <h3>Risk Detection</h3>
-<p>Detect academically weak students at an early stage.</p>
-</div><div class="card" onclick="openFeature('Reports Generated 📈')">
-<i class="fas fa-file-waveform"></i>
-<h3>Smart Reports</h3>
-<p>Generate visual reports and predictive insights.</p>
-</div><div class="card" onclick="openFeature('Notifications Sent 🔔')">
-<i class="fas fa-bell"></i>
-<h3>Alerts & Notifications</h3>
-<p>Send alerts to teachers and students instantly.</p>
+<p>Automatically identifies academically weak students.</p>
 </div>
 </div>
 </section><section id="dashboard">
-<h2 class="section-title">Live Dashboard</h2>
+<h2 class="section-title">Interactive Dashboard</h2>
 <div class="dashboard">
-<div class="stats">
 <div class="stat-box">
-<h2>250</h2>
+<h2>520</h2>
 <p>Total Students</p>
 </div><div class="stat-box">
-<h2>38</h2>
-<p>At Risk Students</p>
+<h2>74</h2>
+<p>At-Risk Students</p>
 </div><div class="stat-box">
-<h2>82%</h2>
-<p>Average Attendance</p>
+<h2>87%</h2>
+<p>Attendance Rate</p>
+</div><div class="stat-box">
+<h2>92%</h2>
+<p>Prediction Accuracy</p>
 </div>
-</div><canvas id="myChart"></canvas>
-
+</div><div class="chart-container">
+<canvas id="performanceChart"></canvas>
 </div>
-</section><section id="dataset">
-<h2 class="section-title">Upload Dataset</h2>
-<div class="upload-box">
-<h2>Upload CSV File</h2>
-<input type="file" id="fileInput">
+</section><section id="upload">
+<h2 class="section-title">Dataset Upload</h2>
+<div class="upload-section">
+<h2>Upload Student Dataset</h2>
+<input type="file" id="datasetFile">
 <br>
-<button class="btn" onclick="analyzeData()">Analyze Dataset</button>
-<p id="result"></p>
+<button class="btn" onclick="analyzeDataset()">Analyze Dataset</button>
+<h3 id="uploadResult"></h3>
 </div>
 </section><section id="team">
-<h2 class="section-title">Our Team</h2>
-<div class="team">
+<h2 class="section-title">Project Team</h2>
+<div class="team-grid">
 <div class="member">
+<i class="fas fa-user"></i>
 <h3>Poorvi</h3>
-<p>Frontend & AI Integration</p>
+<p>Frontend Developer & AI Integration</p>
 </div><div class="member">
-<h3>Team Member 2</h3>
-<p>Backend Developer</p>
+<i class="fas fa-user"></i>
+<h3>Team Member</h3>
+<p>Backend & Database Management</p>
 </div><div class="member">
-<h3>Team Member 3</h3>
-<p>Data Analyst</p>
+<i class="fas fa-user"></i>
+<h3>Team Member</h3>
+<p>Data Analytics & Reports</p>
+</div>
+</div>
+</section><section id="timeline">
+<h2 class="section-title">System Workflow</h2>
+<div class="timeline">
+<div class="timeline-item">
+<h3>1. Upload Dataset</h3>
+<p>Import student attendance and marks data.</p>
+</div><div class="timeline-item">
+<h3>2. AI Processing</h3>
+<p>Analyze performance trends using AI models.</p>
+</div><div class="timeline-item">
+<h3>3. Risk Identification</h3>
+<p>Identify students who need academic support.</p>
+</div><div class="timeline-item">
+<h3>4. Generate Reports</h3>
+<p>Create visual analytics and smart reports.</p>
 </div>
 </div>
 </section><footer>
-<p>© 2026 SPRAS | Hackathon Project</p>
+<p>© 2026 SPRAS | Advanced Hackathon Project 🚀</p>
 </footer><script>
-function openFeature(message){
+function showMessage(message){
 alert(message);
 }
 
-function showDashboard(){
+function scrollDashboard(){
 document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
 }
 
-function analyzeData(){
-const file=document.getElementById('fileInput').files[0];
+function analyzeDataset(){
+const file=document.getElementById('datasetFile').files[0];
 if(file){
-document.getElementById('result').innerHTML='Dataset Uploaded Successfully ✅';
+document.getElementById('uploadResult').innerHTML='Dataset Uploaded & Analyzed Successfully ✅';
 }
 else{
-document.getElementById('result').innerHTML='Please Upload a File ❌';
+document.getElementById('uploadResult').innerHTML='Please upload a dataset file ❌';
 }
 }
 
-const ctx=document.getElementById('myChart');
+const ctx=document.getElementById('performanceChart');
 new Chart(ctx,{
-type:'bar',
+type:'line',
 data:{
-labels:['Jan','Feb','Mar','Apr','May'],
+labels:['Jan','Feb','Mar','Apr','May','Jun'],
 datasets:[{
 label:'Student Performance',
-data:[65,59,80,81,56],
-backgroundColor:['#1e3c72','#2a5298','#4e73df','#36b9cc','#858796']
+data:[60,72,68,80,86,92],
+borderColor:'#38bdf8',
+backgroundColor:'rgba(56,189,248,0.2)',
+fill:true,
+tension:0.4
 }]
 },
 options:{
-responsive:true
-}
-});
-</script></body>
-</html><!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPRAS - Student Performance Risk Alert System</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}body{ background:#f4f7fc; color:#333; }
-
-header{ background:#111827; color:white; padding:20px 50px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000; }
-
-header h1{ font-size:28px; }
-
-nav a{ color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
-
-.hero{ height:90vh; background:linear-gradient(to right,#1e3c72,#2a5298); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; }
-
-.hero h2{ font-size:60px; margin-bottom:20px; }
-
-.hero p{ font-size:22px; max-width:800px; line-height:1.6; }
-
-.btn{ margin-top:30px; padding:15px 35px; background:white; color:#1e3c72; border:none; border-radius:10px; font-size:18px; cursor:pointer; font-weight:bold; transition:0.3s; }
-
-.btn:hover{ transform:scale(1.05); background:#ddd; }
-
-section{ padding:80px 50px; }
-
-.section-title{ text-align:center; font-size:40px; margin-bottom:50px; color:#1e3c72; }
-
-.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
-
-.card{ background:white; padding:30px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer; }
-
-.card:hover{ transform:translateY(-10px); }
-
-.card i{ font-size:40px; margin-bottom:20px; color:#1e3c72; }
-
-.dashboard{ background:white; padding:40px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-
-.stats{ display:flex; justify-content:space-around; flex-wrap:wrap; margin-bottom:40px; }
-
-.stat-box{ background:#1e3c72; color:white; padding:25px; border-radius:15px; width:220px; text-align:center; margin:10px; }
-
-.upload-box{ background:white; padding:40px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-
-.upload-box input{ margin:20px 0; }
-
-.team{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
-
-.member{ background:white; padding:25px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-
-footer{ background:#111827; color:white; text-align:center; padding:20px; margin-top:40px; }
-
-@media(max-width:768px){ .hero h2{ font-size:40px; }
-
-.stats{ flex-direction:column; align-items:center; } } </style>
-
-</head>
-<body><header>
-<h1>SPRAS 🚀</h1>
-<nav>
-<a href="#home">Home</a>
-<a href="#features">Features</a>
-<a href="#dashboard">Dashboard</a>
-<a href="#dataset">Dataset</a>
-<a href="#team">Team</a>
-</nav>
-</header><section class="hero" id="home">
-<h2>Student Performance Risk Alert System</h2>
-<p>AI-powered platform to identify at-risk students using attendance analysis, performance tracking, smart prediction and academic analytics.</p>
-<button class="btn" onclick="showDashboard()">Explore Dashboard</button>
-</section><section id="features">
-<h2 class="section-title">Features</h2>
-<div class="cards">
-<div class="card" onclick="openFeature('Performance Analytics Opened 📊')">
-<i class="fas fa-chart-line"></i>
-<h3>Performance Analytics</h3>
-<p>Analyze marks, assignments, attendance and performance trends.</p>
-</div><div class="card" onclick="openFeature('Risk Detection Activated ⚠️')">
-<i class="fas fa-triangle-exclamation"></i>
-<h3>Risk Detection</h3>
-<p>Detect academically weak students at an early stage.</p>
-</div><div class="card" onclick="openFeature('Reports Generated 📈')">
-<i class="fas fa-file-waveform"></i>
-<h3>Smart Reports</h3>
-<p>Generate visual reports and predictive insights.</p>
-</div><div class="card" onclick="openFeature('Notifications Sent 🔔')">
-<i class="fas fa-bell"></i>
-<h3>Alerts & Notifications</h3>
-<p>Send alerts to teachers and students instantly.</p>
-</div>
-</div>
-</section><section id="dashboard">
-<h2 class="section-title">Live Dashboard</h2>
-<div class="dashboard">
-<div class="stats">
-<div class="stat-box">
-<h2>250</h2>
-<p>Total Students</p>
-</div><div class="stat-box">
-<h2>38</h2>
-<p>At Risk Students</p>
-</div><div class="stat-box">
-<h2>82%</h2>
-<p>Average Attendance</p>
-</div>
-</div><canvas id="myChart"></canvas>
-
-</div>
-</section><section id="dataset">
-<h2 class="section-title">Upload Dataset</h2>
-<div class="upload-box">
-<h2>Upload CSV File</h2>
-<input type="file" id="fileInput">
-<br>
-<button class="btn" onclick="analyzeData()">Analyze Dataset</button>
-<p id="result"></p>
-</div>
-</section><section id="team">
-<h2 class="section-title">Our Team</h2>
-<div class="team">
-<div class="member">
-<h3>Poorvi</h3>
-<p>Frontend & AI Integration</p>
-</div><div class="member">
-<h3>Team Member 2</h3>
-<p>Backend Developer</p>
-</div><div class="member">
-<h3>Team Member 3</h3>
-<p>Data Analyst</p>
-</div>
-</div>
-</section><footer>
-<p>© 2026 SPRAS | Hackathon Project</p>
-</footer><script>
-function openFeature(message){
-alert(message);
-}
-
-function showDashboard(){
-document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
-}
-
-function analyzeData(){
-const file=document.getElementById('fileInput').files[0];
-if(file){
-document.getElementById('result').innerHTML='Dataset Uploaded Successfully ✅';
-}
-else{
-document.getElementById('result').innerHTML='Please Upload a File ❌';
+responsive:true,
+plugins:{
+legend:{
+labels:{
+color:'white'
 }
 }
-
-const ctx=document.getElementById('myChart');
-new Chart(ctx,{
-type:'bar',
-data:{
-labels:['Jan','Feb','Mar','Apr','May'],
-datasets:[{
-label:'Student Performance',
-data:[65,59,80,81,56],
-backgroundColor:['#1e3c72','#2a5298','#4e73df','#36b9cc','#858796']
-}]
 },
-options:{
-responsive:true
+scales:{
+x:{
+ticks:{color:'white'}
+},
+y:{
+ticks:{color:'white'}
+}
+}
 }
 });
 </script></body>
