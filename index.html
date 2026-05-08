@@ -1,92 +1,43 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Performance Risk Alert System</title>
+// App.js - A simplified Dashboard view
+import React from 'react';
 
-  <style>
+const Dashboard = () => {
+  const underservedGroups = [
+    { name: 'Group A', disparity: '15% lower engagement', metric: 'Engagement' },
+    { name: 'Group B', disparity: '20% lower completion', metric: 'Progression' },
+  ];
 
-    body{
-      font-family:Arial;
-      background:#f4f7fb;
-      margin:0;
-      padding:0;
-      text-align:center;
-    }
+  return (
+    <div className="p-8 bg-gray-100 min-h-screen">
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold">Equity Analytical Framework</h1>
+        <p className="text-gray-600">Detecting systemic imbalance in uniform learning systems.</p>
+      </header>
 
-    header{
-      background:#1e3a8a;
-      color:white;
-      padding:30px;
-    }
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Insight Card */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Detected Disparities</h2>
+          <ul>
+            {underservedGroups.map((group, i) => (
+              <li key={i} className="border-b py-2">
+                <strong>{group.name}:</strong> {group.disparity} in {group.metric}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-    .container{
-      margin:50px auto;
-      width:80%;
-      background:white;
-      padding:40px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.2);
-    }
+        {/* Data Input Section */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Upload Dataset</h2>
+          <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+          <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Analyze Systems</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    h1{
-      color:#1e3a8a;
-    }
-
-    .feature{
-      margin:20px;
-      padding:20px;
-      background:#eef3ff;
-      border-radius:8px;
-    }
-
-    button{
-      padding:12px 25px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:5px;
-      font-size:16px;
-    }
-
-  </style>
-
-</head>
-
-<body>
-
-<header>
-  <h1>Student Performance Risk Alert System 🚀</h1>
-  <p>Hackathon Project by Poorvi</p>
-</header>
-
-<div class="container">
-
-  <h1>Welcome</h1>
-
-  <p>
-    This project helps identify students who are academically at risk
-    using attendance and marks analysis.
-  </p>
-
-  <div class="feature">
-    📊 Performance Analysis
-  </div>
-
-  <div class="feature">
-    ⚠️ Risk Detection
-  </div>
-
-  <div class="feature">
-    📈 Reports and Monitoring
-  </div>
-
-  <button>Explore Project</button>
-
-</div>
-
-</body>
-</html>
+export default Dashboard
 
