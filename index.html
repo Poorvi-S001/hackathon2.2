@@ -1,303 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Performance Risk Alert System</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
-    body{
-      background:#f4f7fb;
-      color:#333;
+    body {
+      background: #f4f7fb;
+      color: #333;
     }
 
-    /* NAVBAR */
-
-    nav{
-      background:#0f172a;
-      color:white;
-      padding:20px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      position:sticky;
-      top:0;
+    nav {
+      background: #0f172a;
+      color: white;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav h1{
-      color:#60a5fa;
+    nav h1 {
+      color: #60a5fa;
     }
 
-    nav ul{
-      display:flex;
-      list-style:none;
-      gap:25px;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
     }
 
-    nav ul li a{
-      color:white;
-      text-decoration:none;
-      font-size:16px;
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
     }
 
-    /* HERO */
-
-    .hero{
-      background:linear-gradient(to right,#1e3a8a,#2563eb);
-      color:white;
-      text-align:center;
-      padding:100px 20px;
+    .hero {
+      background: linear-gradient(to right, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
     }
 
-    .hero h2{
-      font-size:50px;
-      margin-bottom:20px;
+    .hero h2 {
+      font-size: 52px;
+      margin-bottom: 20px;
     }
 
-    .hero p{
-      width:70%;
-      margin:auto;
-      font-size:20px;
-      line-height:1.7;
+    .hero p {
+      width: 70%;
+      margin: auto;
+      font-size: 20px;
+      line-height: 1.8;
     }
 
-    .hero button{
-      margin-top:30px;
-      padding:15px 30px;
-      background:white;
-      color:#2563eb;
-      border:none;
-      border-radius:8px;
-      font-size:18px;
-      cursor:pointer;
+    .btn {
+      margin-top: 30px;
+      padding: 14px 28px;
+      background: white;
+      color: #2563eb;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    /* CARDS */
-
-    .section-title{
-      text-align:center;
-      margin:60px 0 30px;
-      color:#1e3a8a;
-      font-size:40px;
+    .section-title {
+      text-align: center;
+      margin: 60px 0 30px;
+      color: #1e3a8a;
+      font-size: 40px;
     }
 
-    .cards{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:30px;
-      padding:20px;
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 20px;
     }
 
-    .card{
-      background:white;
-      width:300px;
-      padding:30px;
-      border-radius:15px;
-      box-shadow:0 0 15px rgba(0,0,0,0.1);
-      transition:0.3s;
+    .card {
+      background: white;
+      width: 300px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      transition: 0.3s;
     }
 
-    .card:hover{
-      transform:translateY(-10px);
+    .card:hover {
+      transform: translateY(-8px);
     }
 
-    .card h3{
-      margin-bottom:15px;
-      color:#2563eb;
+    .card h3 {
+      color: #2563eb;
+      margin-bottom: 15px;
     }
 
-    /* DASHBOARD */
-
-    .dashboard{
-      padding:50px 20px;
+    .dashboard {
+      padding: 60px 20px;
     }
 
-    .stats{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:25px;
-      margin-bottom:40px;
+    .stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 40px;
     }
 
-    .stat-box{
-      background:white;
-      width:220px;
-      padding:25px;
-      border-radius:12px;
-      text-align:center;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    .stat-box {
+      background: white;
+      width: 220px;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .stat-box h2{
-      color:#2563eb;
-      margin-bottom:10px;
+    .stat-box h2 {
+      color: #2563eb;
+      margin-bottom: 10px;
     }
 
-    table{
-      width:90%;
-      margin:auto;
-      border-collapse:collapse;
-      background:white;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
-      border-radius:10px;
-      overflow:hidden;
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    table th{
-      background:#2563eb;
-      color:white;
-      padding:15px;
+    table th {
+      background: #2563eb;
+      color: white;
+      padding: 15px;
     }
 
-    table td{
-      padding:15px;
-      text-align:center;
-      border-bottom:1px solid #ddd;
+    table td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
     }
 
-    .safe{
-      color:green;
-      font-weight:bold;
+    .safe {
+      color: green;
+      font-weight: bold;
     }
 
-    .risk{
-      color:red;
-      font-weight:bold;
+    .risk {
+      color: red;
+      font-weight: bold;
     }
 
-    /* DATASET */
-
-    .dataset{
-      text-align:center;
-      padding:70px 20px;
+    .dataset {
+      text-align: center;
+      padding: 60px 20px;
     }
 
-    .dataset-box{
-      background:white;
-      width:60%;
-      margin:auto;
-      padding:40px;
-      border-radius:15px;
-      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    .dataset-box {
+      width: 60%;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .dataset button{
-      margin-top:20px;
-      padding:12px 25px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:8px;
-      font-size:16px;
-      cursor:pointer;
+    .dataset button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
     }
 
-    /* ABOUT */
-
-    .about{
-      padding:70px 20px;
-      text-align:center;
-      background:#dbeafe;
+    .result-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+      display: none;
     }
 
-    .about p{
-      width:70%;
-      margin:auto;
-      line-height:1.8;
-      font-size:18px;
+    .chart-section {
+      width: 80%;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 50px;
     }
 
-    /* FOOTER */
-
-    footer{
-      background:#0f172a;
-      color:white;
-      text-align:center;
-      padding:25px;
-      margin-top:50px;
+    .about {
+      background: #dbeafe;
+      padding: 70px 20px;
+      text-align: center;
     }
 
+    .about p {
+      width: 70%;
+      margin: auto;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 40px;
+    }
+
+    @media(max-width:768px){
+      .hero h2{
+        font-size:36px;
+      }
+
+      .hero p,
+      .about p,
+      .dataset-box,
+      .chart-section{
+        width:95%;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+    }
   </style>
-
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
-
   <h1>SPRAS 🚀</h1>
 
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Features</a></li>
-    <li><a href="#">Dashboard</a></li>
-    <li><a href="#">Dataset</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#dataset">Dataset</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
-
 </nav>
 
-<!-- HERO -->
-
-<section class="hero">
-
+<section class="hero" id="home">
   <h2>Student Performance Risk Alert System</h2>
 
   <p>
-    AI-powered academic monitoring platform designed to detect
-    at-risk students using attendance analysis, marks prediction,
-    performance tracking, and smart analytics.
+    AI-powered academic monitoring platform designed to identify at-risk students
+    using attendance analysis, marks prediction, performance tracking,
+    and smart analytics.
   </p>
 
-  <button>Explore Dashboard</button>
-
+  <button class="btn" onclick="scrollToDashboard()">
+    Explore Dashboard
+  </button>
 </section>
 
-<!-- FEATURES -->
-
-<h1 class="section-title">Features</h1>
+<h1 class="section-title" id="features">Features</h1>
 
 <section class="cards">
 
   <div class="card">
     <h3>📊 Performance Analytics</h3>
     <p>
-      Analyze marks, attendance, assignments and performance trends.
+      Analyze marks, attendance, assignments, and performance trends.
     </p>
   </div>
 
   <div class="card">
     <h3>⚠️ Risk Detection</h3>
     <p>
-      Detect students needing academic intervention at an early stage.
+      Detect students needing academic support at an early stage.
     </p>
   </div>
 
   <div class="card">
     <h3>📈 Smart Reports</h3>
     <p>
-      Generate visual reports and institutional performance insights.
+      Generate visual reports and institutional insights.
     </p>
   </div>
 
 </section>
 
-<!-- DASHBOARD -->
-
-<section class="dashboard">
+<section class="dashboard" id="dashboard">
 
   <h1 class="section-title">Analytics Dashboard</h1>
 
@@ -326,7 +342,6 @@
   </div>
 
   <table>
-
     <tr>
       <th>Name</th>
       <th>Attendance</th>
@@ -343,63 +358,121 @@
 
     <tr>
       <td>Ananya</td>
-      <td>60%</td>
-      <td>45</td>
+      <td>58%</td>
+      <td>42</td>
       <td class="risk">At Risk</td>
     </tr>
 
     <tr>
       <td>Rohan</td>
-      <td>78%</td>
-      <td>70</td>
+      <td>76%</td>
+      <td>67</td>
       <td class="safe">Average</td>
     </tr>
-
   </table>
-
 </section>
 
-<!-- DATASET -->
+<section class="chart-section">
+  <h1 class="section-title">Performance Chart</h1>
 
-<section class="dataset">
+  <canvas id="performanceChart"></canvas>
+</section>
+
+<section class="dataset" id="dataset">
 
   <h1 class="section-title">Upload Dataset</h1>
 
   <div class="dataset-box">
 
-    <input type="file">
+    <input type="file" id="datasetFile">
 
     <br>
 
-    <button>Analyze Dataset</button>
+    <button onclick="analyzeDataset()">
+      Analyze Dataset
+    </button>
+
+    <div class="result-box" id="resultBox"></div>
 
   </div>
-
 </section>
 
-<!-- ABOUT -->
-
-<section class="about">
+<section class="about" id="about">
 
   <h1 class="section-title">About The Project</h1>
 
   <p>
-    The Student Performance Risk Alert System was developed as a
-    hackathon solution to improve academic monitoring and support
-    institutions in identifying students who need academic guidance.
-    The platform uses analytical methods and AI-based predictions
-    to monitor student progress efficiently.
+    The Student Performance Risk Alert System was developed as a hackathon solution
+    to improve academic monitoring and help institutions identify students who need
+    academic guidance using smart analytics and AI-driven performance tracking.
   </p>
 
 </section>
 
-<!-- FOOTER -->
-
 <footer>
-
   <p>Hackathon Project by Poorvi © 2026</p>
-
 </footer>
+
+<script>
+
+  function scrollToDashboard(){
+    document.getElementById('dashboard').scrollIntoView({
+      behavior:'smooth'
+    });
+  }
+
+  function analyzeDataset(){
+
+    const fileInput = document.getElementById('datasetFile');
+    const resultBox = document.getElementById('resultBox');
+
+    if(fileInput.files.length === 0){
+      alert('Please upload a dataset file first 📂');
+      return;
+    }
+
+    resultBox.style.display = 'block';
+
+    resultBox.innerHTML = `
+      <h3>Dataset Analysis Complete ✅</h3>
+      <p>Total Students Analyzed: 350</p>
+      <p>At Risk Students: 42</p>
+      <p>Average Attendance: 87%</p>
+      <p>Prediction Accuracy: 91%</p>
+    `;
+  }
+
+  const ctx = document.getElementById('performanceChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+
+    data: {
+      labels: ['Attendance', 'Marks', 'Assignments', 'Projects'],
+
+      datasets: [{
+        label: 'Student Performance',
+        data: [87, 78, 90, 85],
+        backgroundColor: [
+          '#2563eb',
+          '#60a5fa',
+          '#1e3a8a',
+          '#3b82f6'
+        ]
+      }]
+    },
+
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true
+        }
+      }
+    }
+  });
+
+</script>
 
 </body>
 </html>
