@@ -1,39 +1,92 @@
 
-#include <stdio.h>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Performance Risk Alert System</title>
 
-int main() {
-    int students, i;
-    float marks[100], average;
-    int belowAverage = 0;
-    float sum = 0;
+  <style>
 
-    printf("===== Student Performance Risk Alert System =====\n");
-
-    printf("Enter number of students: ");
-    scanf("%d", &students);
-
-    for(i = 0; i < students; i++) {
-        printf("Enter marks of student %d: ", i + 1);
-        scanf("%f", &marks[i]);
-
-        sum += marks[i];
+    body{
+      font-family:Arial;
+      background:#f4f7fb;
+      margin:0;
+      padding:0;
+      text-align:center;
     }
 
-    average = sum / students;
-
-    printf("\nAverage Marks = %.2f\n", average);
-
-    printf("\nStudents Below Average:\n");
-
-    for(i = 0; i < students; i++) {
-        if(marks[i] < average) {
-            printf("Student %d is at Risk (Marks = %.2f)\n", i + 1, marks[i]);
-            belowAverage++;
-        }
+    header{
+      background:#1e3a8a;
+      color:white;
+      padding:30px;
     }
 
-    printf("\nTotal Students at Risk: %d\n", belowAverage);
+    .container{
+      margin:50px auto;
+      width:80%;
+      background:white;
+      padding:40px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+    }
 
-    return 0;
-}   
+    h1{
+      color:#1e3a8a;
+    }
+
+    .feature{
+      margin:20px;
+      padding:20px;
+      background:#eef3ff;
+      border-radius:8px;
+    }
+
+    button{
+      padding:12px 25px;
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:5px;
+      font-size:16px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Student Performance Risk Alert System 🚀</h1>
+  <p>Hackathon Project by Poorvi</p>
+</header>
+
+<div class="container">
+
+  <h1>Welcome</h1>
+
+  <p>
+    This project helps identify students who are academically at risk
+    using attendance and marks analysis.
+  </p>
+
+  <div class="feature">
+    📊 Performance Analysis
+  </div>
+
+  <div class="feature">
+    ⚠️ Risk Detection
+  </div>
+
+  <div class="feature">
+    📈 Reports and Monitoring
+  </div>
+
+  <button>Explore Project</button>
+
+</div>
+
+</body>
+</html>
 
