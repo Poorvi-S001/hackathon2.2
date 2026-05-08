@@ -1,43 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// App.js - A simplified Dashboard view
-import React from 'react';
+  <title>Equity Analytical Framework</title>
 
-const Dashboard = () => {
-  const underservedGroups = [
-    { name: 'Group A', disparity: '15% lower engagement', metric: 'Engagement' },
-    { name: 'Group B', disparity: '20% lower completion', metric: 'Progression' },
-  ];
+  <style>
 
-  return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold">Equity Analytical Framework</h1>
-        <p className="text-gray-600">Detecting systemic imbalance in uniform learning systems.</p>
-      </header>
+    body{
+      font-family:Arial;
+      background:#f4f7fb;
+      margin:0;
+      padding:0;
+    }
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Insight Card */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Detected Disparities</h2>
-          <ul>
-            {underservedGroups.map((group, i) => (
-              <li key={i} className="border-b py-2">
-                <strong>{group.name}:</strong> {group.disparity} in {group.metric}
-              </li>
-            ))}
-          </ul>
-        </div>
+    header{
+      background:#1e3a8a;
+      color:white;
+      text-align:center;
+      padding:30px;
+    }
 
-        {/* Data Input Section */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Upload Dataset</h2>
-          <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
-          <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Analyze Systems</button>
-        </div>
-      </div>
-    </div>
-  );
-};
+    .container{
+      width:80%;
+      margin:40px auto;
+    }
 
-export default Dashboard
+    .card{
+      background:white;
+      padding:25px;
+      margin-bottom:25px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      color:#1e3a8a;
+    }
+
+    ul{
+      line-height:2;
+    }
+
+    button{
+      padding:12px 25px;
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    input{
+      margin:15px 0;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>Equity Analytical Framework 📊</h1>
+
+  <p>
+    Detecting systemic imbalance in uniform learning systems
+  </p>
+
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Detected Disparities</h2>
+
+    <ul>
+      <li>Group A — Performance Gap: 22%</li>
+      <li>Group B — Attendance Risk: 15%</li>
+      <li>Group C — Learning Disparity: 10%</li>
+    </ul>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Upload Dataset</h2>
+
+    <input type="file">
+
+    <br><br>
+
+    <button>Analyze System</button>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Analytics Dashboard</h2>
+
+    <p>✔ Student Monitoring</p>
+    <p>✔ Attendance Tracking</p>
+    <p>✔ Risk Prediction</p>
+    <p>✔ Smart Reports</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>
 
