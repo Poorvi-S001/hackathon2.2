@@ -139,6 +139,24 @@ nav{ display:none; } } </style>
 </div><div class="chart-container">
 <canvas id="performanceChart"></canvas>
 </div>
+</section><section id="cgpa-section">
+<h2 class="section-title">CGPA Calculator</h2><div class="upload-section"><h2>Calculate Student CGPA</h2><input type="text" id="cgpaName" placeholder="Enter Student Name" style="padding:12px;width:250px;border-radius:8px;border:none;margin:10px;"><br><input type="number" id="cgpaMarks" placeholder="Enter Total Marks" style="padding:12px;width:250px;border-radius:8px;border:none;margin:10px;"><br><button class="btn" onclick="calculateCGPA()">Calculate CGPA</button>
+
+<h3 id="cgpaResult" style="margin-top:20px;"></h3></div>
+</section><section id="tracker">
+<h2 class="section-title">Student CGPA & Attendance Tracker</h2><div class="upload-section"><h2>Add Student Details</h2><input type="text" id="studentName" placeholder="Enter Student Name" style="padding:12px;width:250px;border-radius:8px;border:none;margin:10px;"><br><input type="number" id="studentMarks" placeholder="Enter Marks" style="padding:12px;width:250px;border-radius:8px;border:none;margin:10px;"><br><input type="number" id="studentAttendance" placeholder="Enter Attendance %" style="padding:12px;width:250px;border-radius:8px;border:none;margin:10px;"><br><button class="btn" onclick="addStudent()">Add Student</button>
+
+<h3 id="studentMessage" style="margin-top:20px;"></h3><br><br>
+
+<table id="studentTable" style="width:100%;background:#1e293b;color:white;border-collapse:collapse;border-radius:10px;overflow:hidden;">
+<tr style="background:#2563eb;">
+<th style="padding:15px;">Student</th>
+<th style="padding:15px;">Marks</th>
+<th style="padding:15px;">Attendance</th>
+<th style="padding:15px;">CGPA</th>
+<th style="padding:15px;">Status</th>
+</tr>
+</table></div>
 </section><section id="upload">
 <h2 class="section-title">Dataset Upload</h2>
 <div class="upload-section">
@@ -191,6 +209,73 @@ alert(message);
 
 function scrollDashboard(){
 document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+}
+
+function calculateCGPA(){
+
+const name=document.getElementById('cgpaName').value;
+const marks=parseFloat(document.getElementById('cgpaMarks').value);
+
+if(name==='' || isNaN(marks)){
+document.getElementById('cgpaResult').innerHTML='Please enter all details ❌';
+return;
+}
+
+const cgpa=(marks/10).toFixed(2);
+
+let grade='Excellent 🌟';
+
+if(cgpa<6){
+grade='Needs Improvement ⚠️';
+}
+else if(cgpa<8){
+grade='Good 👍';
+}
+
+
+document.getElementById('cgpaResult').innerHTML=`
+${name}'s CGPA is <b>${cgpa}</b> (${grade})
+`;
+}
+
+function addStudent(){
+
+const name=document.getElementById('studentName').value;
+const marks=parseFloat(document.getElementById('studentMarks').value);
+const attendance=parseFloat(document.getElementById('studentAttendance').value);
+
+if(name==='' || isNaN(marks) || isNaN(attendance)){
+document.getElementById('studentMessage').innerHTML='Please fill all fields ❌';
+return;
+}
+
+const cgpa=(marks/10).toFixed(2);
+
+let status='Safe ✅';
+
+if(marks<40 || attendance<75){
+status='At Risk ⚠️';
+}
+
+const table=document.getElementById('studentTable');
+
+const row=table.insertRow();
+
+row.innerHTML=`
+<td style="padding:15px;text-align:center;">${name}</td>
+<td style="padding:15px;text-align:center;">${marks}</td>
+<td style="padding:15px;text-align:center;">${attendance}%</td>
+<td style="padding:15px;text-align:center;">${cgpa}</td>
+<td style="padding:15px;text-align:center;">${status}</td>
+`;
+
+document.getElementById('studentMessage').innerHTML='Student Added Successfully ✅';
+
+// Clear fields
+
+document.getElementById('studentName').value='';
+document.getElementById('studentMarks').value='';
+document.getElementById('studentAttendance').value='';
 }
 
 function analyzeDataset(){
